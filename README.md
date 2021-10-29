@@ -14,7 +14,7 @@
 
 ### 配置参考
 
-```json
+```js
 
 {
     "TabManager.tabList": [
