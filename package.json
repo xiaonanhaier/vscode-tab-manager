@@ -4,7 +4,7 @@
   "displayName": "TabManager",
   "description": "A plugin that functions like a browser TAB bar",
   "publisher": "xiaonanhai",
-  "version": "0.0.1",
+  "version": "0.1.0",
   "engines": {
     "vscode": "^1.61.0"
   },
@@ -85,8 +85,8 @@
     "url": "https://github.com/xiaonanhaier/vscode-tab-manager/issues"
   },
   "repository": {
-      "type": "git",
-      "url": "https://github.com/xiaonanhaier/vscode-tab-manager.git"
+    "type": "git",
+    "url": "https://github.com/xiaonanhaier/vscode-tab-manager.git"
   },
   "scripts": {
     "lint": "eslint .",
