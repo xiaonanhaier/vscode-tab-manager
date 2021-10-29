@@ -1,0 +1,100 @@
+{
+  "name": "TabManager",
+  "icon": "icon.png",
+  "displayName": "TabManager",
+  "description": "TabManager",
+  "publisher": "xiaonanhai",
+  "version": "0.0.1",
+  "engines": {
+    "vscode": "^1.61.0"
+  },
+  "categories": [
+    "Other"
+  ],
+  "activationEvents": [
+    "onCommand:TabManager.openNewTab"
+  ],
+  "main": "./extension.js",
+  "contributes": {
+    "commands": [
+      {
+        "command": "TabManager.openNewTab",
+        "title": "openNewTab"
+      }
+    ],
+    "menus": {
+      "editor/context": [
+        {
+          "when": "editorFocus",
+          "command": "TabManager.openNewTab",
+          "group": "navigation"
+        }
+      ]
+    }
+  },
+  "configuration": {
+    "title": "tab manager configuration",
+    "properties": {
+      "TabManager.tabList": {
+        "type": "array",
+        "default": [],
+        "description": "tabList",
+        "item": {
+          "type": "object",
+          "required": [
+            "tabName",
+            "tabUrl"
+          ],
+          "properties": {
+            "tabName": {
+              "type": "string",
+              "default": "",
+              "description": "tab name"
+            },
+            "tabUrl": {
+              "type": "string",
+              "default": "",
+              "description": "tab url"
+            },
+            "params": {
+              "default": {},
+              "description": "params",
+              "type": "object"
+            },
+            "useBrowser": {
+              "default": false,
+              "description": "in default browser open url",
+              "type": "boolean"
+            },
+            "useGitParams": {
+              "default": false,
+              "description": "open git params",
+              "type": "boolean"
+            },
+            "branchKey": {
+              "type": "string",
+              "default": "",
+              "description": "git params key"
+            }
+          }
+        }
+      }
+    }
+  },
+  "scripts": {
+    "lint": "eslint .",
+    "pretest": "yarn run lint",
+    "test": "node ./test/runTest.js"
+  },
+  "devDependencies": {
+    "@types/vscode": "^1.61.0",
+    "@types/glob": "^7.1.4",
+    "@types/mocha": "^9.0.0",
+    "@types/node": "14.x",
+    "eslint": "^7.32.0",
+    "glob": "^7.1.7",
+    "mocha": "^9.1.1",
+    "typescript": "^4.4.3",
+    "@vscode/test-electron": "^1.6.2"
+  }
+}
