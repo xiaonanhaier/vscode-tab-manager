@@ -2,7 +2,7 @@
   "name": "TabManager",
   "icon": "icon.png",
   "displayName": "TabManager",
-  "description": "TabManager",
+  "description": "A plugin that functions like a browser TAB bar",
   "publisher": "xiaonanhai",
   "version": "0.0.1",
   "engines": {
