@@ -1,7 +1,7 @@
 ## 类似浏览器标签栏功能的插件
 ---
 
-![desc](./images/desc.gif)
+![desc](images/desc.gif)
 ### 主要功能
 
 1. 标签页列表

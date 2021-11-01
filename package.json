@@ -4,7 +4,7 @@
   "displayName": "TabManager",
   "description": "A plugin that functions like a browser TAB bar",
   "publisher": "xiaonanhai",
-  "version": "0.3.0",
+  "version": "0.3.1",
   "engines": {
     "vscode": "^1.61.0"
   },
