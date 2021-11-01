@@ -127,9 +127,6 @@ function activate(context) {
 		printDefinitionsForActiveEditor(selectedTab).catch(err => {
 			vscode.window.showErrorMessage(err.message);
 		});
-
-		// 给用户显示一个消息提示
-		vscode.window.showInformationMessage('Hello World from tabManager!');
 	});
 
 	context.subscriptions.push(disposable);
