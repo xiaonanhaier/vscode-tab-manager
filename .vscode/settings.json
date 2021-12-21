@@ -3,12 +3,13 @@
         {
             "tabName": "baidu", // 标签名称
             "tabUrl": "https://www.baidu.com/s", // 标签地址
-            "params": {
-                "wd": "JavaScript" // 参数列表
-            },
+            "params": {},
             "useGitParams": false, // 是否添加分支参数
             "branchKey": "branch", // 分支参数名称
             "useBrowser": true, // 使用默认浏览器打开页面
+            "packageParams": {
+                "name": "wd"
+            }
         },
         {
             "tabName": "vue",
@@ -16,7 +17,8 @@
             "params": {},
             "useGitParams": false,
             "branchKey": "branch",
-            "useBrowser": false,
+            "useBrowser": true,
+            "packageParams": ["name"]
         },
     ]
 }

@@ -29,6 +29,9 @@
             "useGitParams": false, // 是否添加分支参数
             "branchKey": "branch", // 分支参数名称
             "useBrowser": true, // 使用默认浏览器打开页面
+            "packageParams": { // package.json 中的参数 可以是数组 也可以是 对象
+                "name": "wd" // name 为package.json中key, "wd" 为url 上的key
+            }
         },
         {
             "tabName": "vue",
@@ -37,6 +40,7 @@
             "useGitParams": false,
             "branchKey": "branch",
             "useBrowser": false,
+            "packageParams": ["name"]
         },
     ]
 }

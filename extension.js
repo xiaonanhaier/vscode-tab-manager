@@ -1,4 +1,6 @@
+const path = require('path');
 const vscode = require('vscode');
+const fs = require('fs');
 
 // 打开列表
 async function showQuickPickAsync () {
@@ -19,17 +21,69 @@ async function showQuickPickAsync () {
 // 组装URL
 async function getTabUrlAsync(selectedTab) {
 	const {URL} = require('url');
-	const {tabUrl, params = {}, useGitParams, branchKey} = selectedTab;
+	const {tabUrl, params = {}, useGitParams, branchKey, packageParams} = selectedTab;
 	const urlObj = new URL(tabUrl);
 	Object.keys(params).forEach(key => urlObj.searchParams.set(key, params[key]));
 
-	if(useGitParams) {
+	// git branch
+	if (useGitParams) {
 		const branchK = branchKey || 'branch';
 		const branchName = await getGitBranchNameAsync();
 		urlObj.searchParams.set(branchK, branchName);
 	}
+	// package.json
+	if (packageParams) {
+		const searchParams = await getPakcageJosnConfig(packageParams);
+		Object.keys(searchParams).forEach(key => urlObj.searchParams.set(key, searchParams[key]));
+	}
 
 	return urlObj.toString();
+}
+
+function packageExists(filePath) {
+    try {
+        return require.resolve(filePath);
+    } catch (error) {
+        return false;
+    }
+}
+
+// 读取package.json
+function getPakcageJosnConfig (packageParams) {
+	return new Promise ((resolve) => {
+		const filePath = path.join(vscode.workspace.workspaceFolders[0].uri.fsPath, 'package.json');
+		if (packageExists(filePath)) {
+			fs.readFile(filePath, (err, data) => {
+				if (err) {
+					vscode.window.showErrorMessage(`get-package.josn-err-${err.message}`);
+				};
+				const pkg = JSON.parse(data.toString());
+				if (Array.isArray(packageParams)) { // array
+					return resolve(packageParams.reduce((pre, cur) => {
+						if (pkg[cur] && typeof pkg[cur] === 'string') {
+							pre[cur] = pkg[cur];
+						}
+						return pre;
+					}, {}));
+				} else if (typeof packageParams === 'object') { // object
+					try {
+						return resolve(Object.keys(packageParams).reduce((pre, cur) => {
+							if (pkg[cur] && typeof pkg[cur] === 'string') {
+								pre[packageParams[cur]] = pkg[cur];
+							}
+							return pre;
+						}, {}));
+					} catch (error) {
+						vscode.window.showErrorMessage(`get-packageParams-err-${err.message}`);
+					}
+				}
+				resolve({});
+			});
+		} else {
+			vscode.window.showErrorMessage(`get-package.josn-err-package.josn not found`);
+			resolve({});
+		}
+	});	
 }
 
 // 获取分支名称
